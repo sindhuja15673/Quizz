@@ -1,4 +1,3 @@
-// Result.js
 import React from 'react';
 import './Result.css';
 
@@ -7,7 +6,7 @@ function Result({ score, totalQuestions, restartQuiz }) {
 
   return (
     <div>
-      <a className='link' href='./App.js'>Home</a>
+      <a className='link' href='/'>Home</a>
       <h2>Your Score: {score}/{totalQuestions}</h2>
       <p>Percentage: {percentage}%</p>
       <button className='buttons' onClick={restartQuiz}>Restart Quiz</button>
