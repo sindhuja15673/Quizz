@@ -31,19 +31,17 @@ const scoreSchema = new mongoose.Schema({
 
 const Quiz = mongoose.model('Quiz', quizSchema);
 const Score = mongoose.model('Score', scoreSchema);
-
-
 app.get('/quiz/:category', async (req, res) => {
-  const category = req.params.category;
   try {
-    const quiz = await Quiz.findOne({ category }).exec();
-    if (quiz) {
-      res.json(quiz.questions);
-    } else {
-      res.status(404).send('Category not found');
-    }
-  } catch (err) {
-    res.status(500).send(err);
+      const category = req.params.category;
+      const quizzes = await Quiz.find({ category });
+      if (!quizzes.length) {
+          return res.status(404).json({ message: "No quizzes found" });
+      }
+      res.json(quizzes);
+  } catch (error) {
+      console.error("Error fetching quiz data:", error);
+      res.status(500).json({ message: "Server error" });
   }
 });
 
